@@ -69,7 +69,7 @@ function Header() {
                 </Link>
               </span>
               <span className="text-center  text-shadow font-extrabold text-slate-100">
-                {user?.user.name}
+                {user?.name}
               </span>
               <span onClick={() => setLogout(!logouts)} className="pl-3">
                 <CgProfile className="inline-block text-shadow text-xl cursor-pointer text-slate-100" />

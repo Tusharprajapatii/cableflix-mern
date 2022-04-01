@@ -9,7 +9,9 @@ function SignIn() {
   const alert = useAlert();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isSuccess, error } = useSelector((state) => state.auth);
+  const { user, isSuccess, isError, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
   // const [Signup, responseInfo] = usePostSignUpMutation();
   const [signup, setSignup] = React.useState(true);
   const [signUser, setSignUser] = React.useState({
@@ -34,13 +36,14 @@ function SignIn() {
     });
   };
   React.useEffect(() => {
+    if (isError) alert.error(message);
+
     if (user) {
       navigate("/home");
       alert.success("logged successfully");
     }
-    if (error) alert.error("error in logging in");
     dispatch(reset());
-  }, [user, isSuccess, navigate, dispatch]);
+  }, [user, isSuccess, navigate, dispatch, isError, alert, message]);
   const onSubmitSignHandler = (e) => {
     e.preventDefault();
     dispatch(register(signUser));
@@ -80,7 +83,7 @@ function SignIn() {
                 </label>
                 <input
                   className="border-2 rounded-md p-1"
-                  type="text"
+                  type="email"
                   id="email"
                   name="email"
                   required
@@ -103,7 +106,10 @@ function SignIn() {
                   onChange={onChangeHandler}
                 />
               </div>
-              <button className="text-slate-100 ring-4 bg-black p-1 rounded-md">
+              <button
+                className={`text-slate-100 ${isLoading &&
+                  "opacity-30"} ring-4 bg-black p-1 rounded-md`}
+              >
                 Sign Up
               </button>
             </form>
@@ -134,7 +140,7 @@ function SignIn() {
                 </label>
                 <input
                   className="border-2 rounded-md p-1"
-                  type="text"
+                  type="email"
                   id="email"
                   name="email"
                   required
@@ -157,7 +163,10 @@ function SignIn() {
                   onChange={onChangeLoginHandler}
                 />
               </div>
-              <button className="text-slate-100 ring-4 bg-black p-1 rounded-md">
+              <button
+                className={`text-slate-100 ${isLoading &&
+                  "opacity-30"} ring-4 bg-black p-1 rounded-md`}
+              >
                 LogIn
               </button>
             </form>

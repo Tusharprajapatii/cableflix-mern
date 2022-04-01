@@ -6,7 +6,8 @@ import SearchPage from "./components/SearchPage";
 import SignIn from "./components/SignIn";
 import WatchLater from "./components/WatchLater";
 import SingleMovie from "./components/SingleMovie";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/:name/:id" element={<SingleMovie />} />
         <Route path="/" element={<SignIn />} />
         <Route path="/account/watchlater" element={<WatchLater />} />
+        <ToastContainer />
       </Routes>
     </>
   );

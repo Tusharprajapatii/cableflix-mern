@@ -5,7 +5,7 @@ import { requests } from "../utils/requests";
 
 function Main() {
   return (
-    <div className="w-full pb-6 overflow-hidden">
+    <div className="w-full pb-6">
       <Banner />
       <Rows
         url={requests.fetchNetflixOriginals}
